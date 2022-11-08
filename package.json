@@ -8,7 +8,7 @@
   },
   "type": "module",
   "name": "aws-signature-v4-subtle",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Sign requests to AWS with their Version 4 Signature algorithm. Uses only `crypto.subtle`",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
