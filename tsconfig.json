@@ -1,0 +1,29 @@
+{
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "test"
+    ],
+    "compilerOptions": {
+        "outDir": "./lib",
+        "incremental": true,
+        "target": "es2021",
+        "declaration": true,
+        "lib": [
+            "es2021"
+        ],
+        "module": "es2022",
+        "moduleResolution": "node",
+        "types": [
+            "@types/node"
+        ],
+        "isolatedModules": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "resolveJsonModule": true
+    }
+}

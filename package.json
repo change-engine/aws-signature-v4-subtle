@@ -1,0 +1,30 @@
+{
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build"
+  },
+  "name": "aws-signature-v4-subtle",
+  "version": "1.0.0",
+  "description": "Sign requests to AWS with their Version 4 Signature algorithm. Uses only `crypto.subtle`",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": "git@github.com:change-engine/aws-signature-v4-subtle.git",
+  "author": "ChangeEngine <engineering@changeengine.com>",
+  "license": "MIT",
+  "private": true,
+  "files": [
+    "lib/**/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "prettier": "^2.7.1",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "node": "^19.0.1"
+  }
+}
