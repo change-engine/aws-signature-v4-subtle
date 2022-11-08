@@ -5,7 +5,7 @@ export type Config = {
   accessKeySecret: string;
 };
 
-export type Request = {
+export type AwsRequest = {
   method: string;
   url: string;
   body: string;

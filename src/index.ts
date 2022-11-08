@@ -1,6 +1,6 @@
 // https://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
 
-import { BodyAndAuth, Config, Request } from './types';
+import { AwsRequest, BodyAndAuth, Config } from './types';
 import { createHash, createHmac, toHex } from './utils';
 
 // https://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
@@ -49,7 +49,7 @@ async function hmacSignature(secret: string, values: string[], data: string): Pr
   return toHex(await createHmac(data, signingKey));
 }
 
-async function createCanonicalRequest(config: Config, request: Request): Promise<BodyAndAuth> {
+async function createCanonicalRequest(config: Config, request: AwsRequest): Promise<BodyAndAuth> {
   const { search, pathname } = new URL(request.url);
 
   if (!request.headers['X-Amz-Date']) {
@@ -89,3 +89,4 @@ async function createCanonicalRequest(config: Config, request: Request): Promise
 }
 
 export { createCanonicalRequest, createHash, createHmac, toHex };
+export type { AwsRequest, BodyAndAuth, Config };
