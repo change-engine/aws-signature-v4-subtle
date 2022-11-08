@@ -1,16 +1,5 @@
 import { subtle } from 'crypto';
 
-export async function verifyHmac(data: string, secret: string, signature: string): Promise<boolean> {
-  return await subtle.verify(
-    'HMAC',
-    await subtle.importKey('raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, [
-      'verify',
-    ]),
-    new TextEncoder().encode(signature.substring(3)),
-    new TextEncoder().encode(data),
-  );
-}
-
 export async function createHmac(data: string | Uint8Array, secret: string | Uint8Array): Promise<Uint8Array> {
   return new Uint8Array(
     await subtle.sign(
