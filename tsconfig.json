@@ -4,9 +4,9 @@
     "outDir": "./lib",
     "target": "es2021",
     "declaration": true,
-    "lib": ["webworker"],
+    "lib": ["webworker", "es2021"],
     "module": "es2022",
     "strict": true,
-    "moduleResolution": "node"
+    "esModuleInterop" : true
   }
 }
