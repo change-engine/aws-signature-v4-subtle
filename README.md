@@ -7,30 +7,24 @@ Sign requests to AWS with their Version 4 Signature algorithm. Uses only `crypto
 ## To retrieve a Secret from Secrets Manager:
 
 ```typescript
-const { authorization, body } = await createCanonicalRequest(
-  {
-    service: 'secretsmanager',
-    region: 'us-west-1',
-    accessKeyId: '<Access Key ID>',
-    accessKeySecret: '<Access Key Secret>',
-  },
-  {
-    url: 'https://secretsmanager.us-west-1.amazonaws.com',
-    method: 'POST',
-    headers: {
+const response = await fetch(
+  ...(await AwsToFetch(
+    {
+      AWS_REGION: 'us-west-1',
+      AWS_ACCESS_KEY_ID: '<Access Key ID>',
+      AWS_SECRET_ACCESS_KEY: '<Access Key Secret>',
+    },
+    'secretsmanager',
+    'POST',
+    {
       'content-type': 'application/x-amz-json-1.1',
       'X-Amz-Target': 'secretsmanager.GetSecretValue',
-      Host: 'secretsmanager.us-west-1.amazonaws.com',
     },
-    body: JSON.stringify({ SecretId: 'SOME_SECRET_ID' }),
-  },
+    JSON.stringify({
+      SecretId: `SLACK_SIGNING_SECRET_${accountId}`,
+    }),
+  )),
 );
-
-const { url, ...rest } = request;
-
-const response = await fetch(url, {
-  ...rest,
-  headers: { ...request.headers, Authorization: authorization },
-  body,
-});
+if (!response.ok) throw new Error('Error talking to AWS');
+const secret = (await response.json<{ SecretString: string }>()).SecretString;
 ```

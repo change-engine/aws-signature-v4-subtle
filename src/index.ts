@@ -88,5 +88,47 @@ async function createCanonicalRequest(config: Config, request: AwsRequest): Prom
   };
 }
 
-export { createCanonicalRequest, createHash, createHmac, toHex };
+/** Helper to easily use with `fetch` */
+async function AwsToFetch(
+  env: {
+    AWS_REGION: string;
+    AWS_ACCESS_KEY_ID: string;
+    AWS_SECRET_ACCESS_KEY: string;
+  },
+  service: string,
+  method: 'HEAD' | 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE',
+  headers: { [name: string]: string },
+  body: string,
+): Promise<[string, RequestInit]> {
+  const request = {
+    url: `https://${service}.${env.AWS_REGION}.amazonaws.com`,
+    service,
+    method,
+    headers: {
+      ...headers,
+      Host: `${service}.${env.AWS_REGION}.amazonaws.com`,
+    },
+    body: body,
+  };
+  const { authorization } = await createCanonicalRequest(
+    {
+      service,
+      region: env.AWS_REGION,
+      accessKeyId: env.AWS_ACCESS_KEY_ID,
+      accessKeySecret: env.AWS_SECRET_ACCESS_KEY,
+    },
+    request,
+  );
+  const { url, ...rest } = request;
+  return [
+    url,
+    {
+      ...rest,
+      headers: { ...rest.headers, Authorization: authorization },
+      body,
+    },
+  ];
+}
+
+export { createCanonicalRequest, createHash, createHmac, toHex, AwsToFetch };
 export type { AwsRequest, BodyAndAuth, Config };
