@@ -14,7 +14,7 @@
   "repository": "git@github.com:change-engine/aws-signature-v4-subtle.git",
   "author": "ChangeEngine <engineering@changeengine.com>",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "files": [
     "lib/**/*"
   ],
