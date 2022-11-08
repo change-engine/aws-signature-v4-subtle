@@ -2,7 +2,7 @@
 
 import { BodyAndAuth, Config, Request } from './types';
 import { createHash, createHmac, toHex } from './utils';
-export type { createHash, createHmac, toHex } from './utils';
+export { createHash, createHmac, toHex } from './utils';
 
 // https://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
 // > Each path segment must be URI-encoded twice (except for Amazon S3 which
