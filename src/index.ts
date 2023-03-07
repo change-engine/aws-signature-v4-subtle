@@ -99,7 +99,7 @@ async function AwsToFetch(
   method: 'HEAD' | 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE',
   headers: { [name: string]: string },
   body: string,
-): Promise<[string, RequestInit]> {
+) {
   const request = {
     url: `https://${service}.${env.AWS_REGION}.amazonaws.com`,
     service,
