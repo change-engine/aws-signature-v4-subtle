@@ -99,7 +99,16 @@ async function AwsToFetch(
   method: 'HEAD' | 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE',
   headers: { [name: string]: string },
   body: string,
-) {
+): Promise<
+  [
+    string,
+    {
+      method: 'HEAD' | 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE';
+      headers: { [name: string]: string };
+      body: string;
+    },
+  ]
+> {
   const request = {
     url: `https://${service}.${env.AWS_REGION}.amazonaws.com`,
     service,
@@ -125,7 +134,6 @@ async function AwsToFetch(
     {
       ...rest,
       headers: { ...rest.headers, Authorization: authorization },
-      body,
     },
   ];
 }
