@@ -105,3 +105,8 @@ dist
 
 # Build
 /lib
+
+# Berry
+.yarn
+.pnp.cjs
+.pnp.loader.mjs
