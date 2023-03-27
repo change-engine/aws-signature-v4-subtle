@@ -1,7 +1,7 @@
 // https://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
 
-import { AwsRequest, BodyAndAuth, Config } from './types';
-import { createHash, createHmac, toHex } from './utils';
+import { AwsRequest, BodyAndAuth, Config } from './types.js';
+import { createHash, createHmac, toHex } from './utils.js';
 
 // https://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
 // > Each path segment must be URI-encoded twice (except for Amazon S3 which
