@@ -12,3 +12,5 @@ updates:
     schedule:
       interval: "daily"
       time: "03:21"
+    ignore:
+      - dependency-name: "vitest"
